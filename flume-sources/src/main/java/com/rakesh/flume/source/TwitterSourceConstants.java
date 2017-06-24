@@ -16,14 +16,14 @@
  * limitations under the License.
  */
 
-package com.cloudera.flume.source;
+package com.rakesh.flume.source;
 
 public class TwitterSourceConstants {
 
-  public static final String CONSUMER_KEY_KEY = "consumerKey";
-  public static final String CONSUMER_SECRET_KEY = "consumerSecret";
-  public static final String ACCESS_TOKEN_KEY = "accessToken";
-  public static final String ACCESS_TOKEN_SECRET_KEY = "accessTokenSecret";
+  public static final String CONSUMER_KEY_KEY = "3IH7ok1kZyINT9ryIqIhn5qN2";
+  public static final String CONSUMER_SECRET_KEY = "6svfqUzY0qayZ25qFAkaWEMRVMCP8fqSuQ2UTGwbz0Xpd1vcne";
+  public static final String ACCESS_TOKEN_KEY = "45173108-uVf7aorbNFFtBpa75x4JkiI9x34HA0jTvDyf1kWVo";
+  public static final String ACCESS_TOKEN_SECRET_KEY = "sQmTI7BEnvm2vLEWvWQzVLr0ubsmanS9EVfLJnH3pk9st";
   
   public static final String BATCH_SIZE_KEY = "batchSize";
   public static final long DEFAULT_BATCH_SIZE = 1000L;
