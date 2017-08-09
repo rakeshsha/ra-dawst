@@ -7,7 +7,13 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.Encoders;
 import org.apache.spark.internal.Logging;
 import org.apache.spark.sql.SparkSession;
-
+import org.apache.spark.api.java.JavaPairRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.SparkConf;
+import scala.Tuple2;
+import java.util.Arrays;
+import org.apache.hadoop.fs.FSDataInputStream;
 
 /**
  * Created by cloudera on 7/2/17.
@@ -17,23 +23,18 @@ public class testSpark {
     public static void main(String args[])
     {
 
-        SparkSession spark = SparkSession
-                .builder()
-                .appName("Spark SQL examples")
-                .config("spark.some.config.option", "some-value")
-                .master("local")
-                .getOrCreate();
 
-        System.out.println("Test");
+        //Create a SparkContext to initialize
+        SparkConf conf = new SparkConf().setMaster("local").setAppName("Word Count").setSparkHome("/usr/lib/spark/").set("spark.driver.host","localhost");
 
-        Dataset<Row> data = spark.read().json("hdfs://quickstart.cloudera:8020/tmp/kafka/channel/FlumeTweet.1498965486767.json");
+        // Create a Java version of the Spark Context
+        JavaSparkContext sc = new JavaSparkContext(conf);
 
-        data.show();
+        // Load the text into a Spark RDD, which is a distributed representation of each line of text
+        JavaRDD<String> textFile = sc.textFile("src/main/resources/shakespeare.txt");
 
-        data.printSchema();
-
-        spark.stop();
+    }
 
 
     }
-}
+

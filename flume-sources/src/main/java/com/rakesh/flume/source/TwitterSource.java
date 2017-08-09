@@ -76,7 +76,15 @@ public class TwitterSource extends AbstractSource
     accessToken = context.getString(TwitterSourceConstants.ACCESS_TOKEN_KEY);
     accessTokenSecret = context.getString(TwitterSourceConstants.ACCESS_TOKEN_SECRET_KEY);
 
-    logger.debug(String.format("Auth details: %s,%s,%s,%s", consumerKey, consumerSecret, accessToken, accessTokenSecret));
+    String consumerKey = context.getString("consumerKey");
+    String consumerSecret = context.getString("consumerSecret");
+    String accessToken = context.getString("accessToken");
+    String accessTokenSecret = context.getString("accessTokenSecret");
+
+    logger.info("Consumer Key:        '" + consumerKey + "'"+ context.getString(TwitterSourceConstants.CONSUMER_KEY_KEY));
+    logger.info("Consumer Secret:     '" + consumerSecret + "'");
+    logger.info("Access Token:        '" + accessToken + "'");
+    logger.info("Access Token Secret: '" + accessTokenSecret + "'");
 
     String keywordString = context.getString(TwitterSourceConstants.KEYWORDS_KEY, "");
     if (keywordString.trim().length() == 0) {
@@ -133,11 +141,11 @@ public class TwitterSource extends AbstractSource
       public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
       public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}
       public void onScrubGeo(long userId, long upToStatusId) {}
-      public void onException(Exception ex) {}
+      public void onException(Exception ex) {System.out.println(ex.getMessage());}
       public void onStallWarning(StallWarning warning) {}
     };
 
-    logger.debug("Setting up Twitter sample stream using consumer key {} and" +
+    logger.info("Setting up Twitter sample stream using consumer key {} and" +
           " access token {}", new String[] { consumerKey, accessToken });
     // Set up the stream's listener (defined above),
     twitterStream.addListener(listener);
@@ -164,4 +172,5 @@ public class TwitterSource extends AbstractSource
     twitterStream.shutdown();
     super.stop();
   }
+
 }
